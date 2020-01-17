@@ -1,0 +1,19 @@
+
+<form class="mg-5 container">
+  <div class="form-row">
+    <div class="col">
+      <input [(ngModel)]="nameField" name="nameFiled"  type="text" class="form-control" placeholder="Name">
+    </div>
+    <div class="col">
+      <input [(ngModel)]="emailField" name="emailField"  type="text" class="form-control" placeholder="Email">
+    </div>
+
+    <select [(ngModel)]="roleField" name="roleField" class="form-control col">
+      <option value="admin">Admin</option>
+      <option value="superuser">Super-User</option>
+      <option value="user">User</option>
+      <option selected value=""></option>
+    </select>
+    <button (click)="getUsers()" type="button" class="btn btn-primary ml-3">Search</button>
+  </div>
+</form>

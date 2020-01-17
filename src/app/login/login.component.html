@@ -1,0 +1,13 @@
+
+<div class="container mx-auto">
+  <!-- <img src="" alt="UpAcademy imagem"> -->
+
+<input [(ngModel)]="user.email" type="email" placeholder="escreve o email" />
+<br>
+<br>
+<input [(ngModel)]="user.password" type="password" placeholder="escreve a password" />
+<br>
+<br>
+<p *ngIf="showError">{{errorMsg}}</p>
+<button (click)="login()"> LOG IN </button>
+</div>
