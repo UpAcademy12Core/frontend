@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {    
-    this.userApi.login(this.user);
+    //this.userApi.login(this.user);
     this.userApi.authenticateUser(this.user).subscribe((result: any) => {
       console.log(result);
       this.userApi.setCurrentUser(result);
