@@ -7,14 +7,22 @@ import { UserServiceService } from '../services/user-service/user-service.servic
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
   public name: string;
+  public showAdminTab: boolean = false;
+
   constructor(
-    private userService: UserServiceService
+    private userApi: UserServiceService
   ) {
-    this.name = this.userService.getCurrentName();
+    this.name = this.userApi.getCurrentName();
+    if (this.userApi.isAdmin()) {
+      this.showAdminTab = true;
+    }
   }
 
   ngOnInit() {
   }
+
+
 
 }

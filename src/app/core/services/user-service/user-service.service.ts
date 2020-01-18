@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UserServiceService {
 
-  private url = 'http://localhost:8080/CoreFinalProject/users/';
+  private url = 'http://localhost:8080/coreFinalProject/users/';
  
   private currentUser: User = new User();
   public currentUser$: ReplaySubject<User> = new ReplaySubject(1);
@@ -31,28 +31,28 @@ export class UserServiceService {
   }
 
   public isAdmin(){
-    if (this.currentUser.role == "admin") {
+    if (this.currentUser.role == "ADMIN") {
       return true;
     }
     return false;
   }
 
-  public login(user: User) {
+  /* public login(user: User) {
     user.id = 1;
-    user.name = "Zé";
-    user.role = "admin";
+    user.username = "Zé";
+    user.role = "ADMIN";
     if (user.email !== "")  {
       this.currentUser = user;
       this.currentUser$.next(this.currentUser);
     }
-  }
+  } */
 
   public authenticateUser(user: User) {
-    return this.http.post(this.url, user);
+    return this.http.post(this.url + "login", user);
   }
 
   public getCurrentName():string {
-    return this.currentUser.name;
+    return this.currentUser.username;
   }
 
   public getCurrentUser() {
@@ -63,12 +63,16 @@ export class UserServiceService {
    this.currentUser$.next(this.currentUser);
   }
 
-  getUsers(nameField: string, emailField: string, roleField: string) {
+  public getUsers(nameField: string, emailField: string, roleField: string) {
     const params = new HttpParams();
-    params.set("nameField", nameField);
-    params.set("emailField", emailField);
-    params.set("roleField", roleField);
+    params.set("username", nameField);
+    params.set("email", emailField);
+    params.set("role", roleField);
     return this.http.get(this.url, {params});
+  }
+
+  public createUser(user: User) {
+    this.http.post(this.url, user).subscribe((msg: string) => console.log(msg));
   }
 
 }

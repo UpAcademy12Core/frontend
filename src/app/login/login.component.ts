@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public user: User = new User();
-  public errorMsg: string = "Incorrect Email or Password";
+  public errorMsg: string = "Wrong Email or Password";
   public showError: boolean = false;
 
   constructor(
@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {    
-    //this.userApi.login(this.user);
     this.userApi.authenticateUser(this.user).subscribe((result: any) => {
       console.log(result);
       this.userApi.setCurrentUser(result);
@@ -31,10 +30,6 @@ export class LoginComponent implements OnInit {
     }, (error) => {
       this.showError = true;
     });
-    
-    
-    
-    
   }
 
 }
