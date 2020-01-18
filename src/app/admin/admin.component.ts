@@ -15,12 +15,14 @@ export class AdminComponent implements OnInit {
   private emailField: string;
   private roleField: string;
   private users: User[];
-  private user: User = new User();
+  private userToCreate: User = new User();
+  private userToUpdate: User = new User();
+  private headers = ["username", "email", "role"];
+  private showTable: boolean = false;
 
   constructor(
     private userApi:UserServiceService,
     private modalService: BsModalService,
-    //private modalRef: BsModalRef
   ) { }
 
   ngOnInit() {
@@ -29,18 +31,54 @@ export class AdminComponent implements OnInit {
   getUsers() {
     this.userApi.getUsers(this.nameField, this.emailField, this.roleField).subscribe((users: User[]) => {
       this.users = users;
+      if (this.users.length > 0) {
+        this.showTable = true;
+      }
       console.log(users);
     });
   }
 
   public createUser() {
-    
-    
-    this.userApi.createUser(this.user);
+    this.userApi.createUser(this.userToCreate).subscribe(
+      (msg: string) => {
+      this.getUsers();
+      console.log(msg);
+    },(error: string) => {
+      console.log(error);
+    });
     this.modalRef.hide();
   }
 
-  openModal(template: TemplateRef<any>) {
+  public updateUser(rowIndex: number) {
+    //this.userToUpdate.password = "1234";
+    this.userApi.updateUser(this.userToUpdate).subscribe(
+      (msg: string) => {
+        console.log(msg);
+      },(error: string) => {
+        console.log(error);
+      });
+      this.modalRef.hide();
+  }
+
+  public deleteUser(rowIndex: number) {
+    this.userApi.deleteUser(this.users[rowIndex].id).subscribe(
+      (msg: string) => {
+        console.log(msg);
+        this.users.splice(rowIndex, 1);
+        if (this.users.length <= 0) {
+          this.showTable = false;
+        }
+      },(error: string) => {
+        console.log(error);
+      });
+  }
+
+  openModalAddUser(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openModalUpdateUser(template: TemplateRef<any>, rowIndex: number) {
+    this.userToUpdate = this.users[rowIndex];
     this.modalRef = this.modalService.show(template);
   }
 

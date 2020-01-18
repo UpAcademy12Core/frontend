@@ -72,7 +72,15 @@ export class UserServiceService {
   }
 
   public createUser(user: User) {
-    this.http.post(this.url, user).subscribe((msg: string) => console.log(msg));
+    return this.http.post(this.url, user, {responseType: 'text'});
+  }
+
+  public updateUser(user: User) {
+    return this.http.put(this.url, user, {responseType: 'text'});
+  }
+
+  public deleteUser(id: number) {
+    return this.http.delete(this.url + id, {responseType: 'text'});
   }
 
 }
