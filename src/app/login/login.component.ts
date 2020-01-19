@@ -18,11 +18,7 @@ export class LoginComponent implements OnInit {
     private userApi: UserServiceService,
     private router: Router
   ) { }
-
-  ngOnInit() {
-  }
-
-  public login() {    
+  public login() {
     this.userApi.authenticateUser(this.user).subscribe((result: any) => {
       console.log(result);
       this.userApi.setCurrentUser(result);
@@ -31,5 +27,9 @@ export class LoginComponent implements OnInit {
       this.showError = true;
     });
   }
+
+  ngOnInit() {
+  }
+
 
 }

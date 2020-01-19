@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { User } from '../../models/user';
 import { ReplaySubject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { error } from '@angular/compiler/src/util';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -23,7 +22,7 @@ export class UserServiceService {
   }
 
   public isAuthenticated(): boolean {
-    if (this.currentUser.id) {
+    if (this.currentUser && this.currentUser.id) {
       return true;
     } else {
       return false;
@@ -31,21 +30,11 @@ export class UserServiceService {
   }
 
   public isAdmin(){
-    if (this.currentUser.role == "ADMIN") {
+    if (this.currentUser && this.currentUser.role == "ADMIN") {
       return true;
     }
     return false;
   }
-
-  /* public login(user: User) {
-    user.id = 1;
-    user.username = "Zé";
-    user.role = "ADMIN";
-    if (user.email !== "")  {
-      this.currentUser = user;
-      this.currentUser$.next(this.currentUser);
-    }
-  } */
 
   public authenticateUser(user: User) {
     return this.http.post(this.url + "login", user);
@@ -58,9 +47,15 @@ export class UserServiceService {
   public getCurrentUser() {
     return this.currentUser;
   }
+
   public setCurrentUser(user: User) {
    this.currentUser = user;
    this.currentUser$.next(this.currentUser);
+  }
+
+  public logout() {
+    this.currentUser = null;
+    this.currentUser$.next(this.currentUser);
   }
 
   public getUsers(nameField: string, emailField: string, roleField: string) {

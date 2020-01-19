@@ -13,12 +13,12 @@ public currentUser$: ReplaySubject<User> = new ReplaySubject(1);
 public show: boolean = false;
 public subscriptionUser: Subscription;
 
-  constructor(
+constructor(
     private userApi: UserServiceService
     ){
       this.currentUser$ = this.userApi.currentUser$;
       this.subscriptionUser = this.currentUser$.subscribe(s => {
-        if(s.id) {
+        if(s && s.id) {
           this.show = true} 
       });
     }

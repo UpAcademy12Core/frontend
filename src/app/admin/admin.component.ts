@@ -2,11 +2,17 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { UserServiceService } from '../core/services/user-service/user-service.service';
 import { User } from '../core/models/user';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true } }]
 })
 export class AdminComponent implements OnInit {
 
@@ -17,11 +23,16 @@ export class AdminComponent implements OnInit {
   private users: User[];
   private userToCreate: User = new User();
   private userToUpdate: User = new User();
+  private rowUserToDelete: number;
   private headers = ["username", "email", "role"];
   private showTable: boolean = false;
+  faSearch = faSearch;
+  faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
+  faUserPlus = faUserPlus;
 
   constructor(
-    private userApi:UserServiceService,
+    private userApi: UserServiceService,
     private modalService: BsModalService,
   ) { }
 
@@ -47,12 +58,16 @@ export class AdminComponent implements OnInit {
       console.log(error);
     });
     this.modalRef.hide();
+    this.userToCreate.email = "";
+    this.userToCreate.username = "";
+    this.userToCreate.role = "";
   }
 
-  public updateUser(rowIndex: number) {
+  public updateUser() {
     //this.userToUpdate.password = "1234";
     this.userApi.updateUser(this.userToUpdate).subscribe(
       (msg: string) => {
+        this.getUsers();
         console.log(msg);
       },(error: string) => {
         console.log(error);
@@ -60,17 +75,18 @@ export class AdminComponent implements OnInit {
       this.modalRef.hide();
   }
 
-  public deleteUser(rowIndex: number) {
-    this.userApi.deleteUser(this.users[rowIndex].id).subscribe(
+  public deleteUser() {
+    this.userApi.deleteUser(this.users[this.rowUserToDelete].id).subscribe(
       (msg: string) => {
         console.log(msg);
-        this.users.splice(rowIndex, 1);
+        this.users.splice(this.rowUserToDelete, 1);
         if (this.users.length <= 0) {
           this.showTable = false;
         }
       },(error: string) => {
         console.log(error);
       });
+      this.modalRef.hide();
   }
 
   openModalAddUser(template: TemplateRef<any>) {
@@ -78,7 +94,12 @@ export class AdminComponent implements OnInit {
   }
 
   openModalUpdateUser(template: TemplateRef<any>, rowIndex: number) {
-    this.userToUpdate = this.users[rowIndex];
+    this.userToUpdate = { ...this.users[rowIndex] };
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openModalConfirmDeleteUser(template: TemplateRef<any>, rowIndex: number) {
+    this.rowUserToDelete = rowIndex;
     this.modalRef = this.modalService.show(template);
   }
 
