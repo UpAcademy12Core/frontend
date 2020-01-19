@@ -15,6 +15,7 @@ import { ModalModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgxSelectModule } from 'ngx-select-ex';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     FontAwesomeModule,
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    NgxSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

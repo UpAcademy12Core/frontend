@@ -1,13 +1,13 @@
 
 <div class="container row mx-auto w-75">
-  <div class="container mb-4 text-right">
+  <div class="container mb-4">
     <button type="button" class="btn-borderless btn-edit" (click)="openModalAddUser(templateAddUser)">
       <fa-icon [icon]="faUserPlus" size="2x"></fa-icon>
     </button>
   </div>
 
   <!-- Filter Fields -->
-  <form class="col-12">
+  <form class="col-12 mx-auto">
     <div class="form-row">
       <div class="col-4">
         <input [(ngModel)]="nameField" name="nameFiled" type="text" class="form-control" placeholder="Nome">
@@ -15,13 +15,7 @@
       <div class="col-4">
         <input [(ngModel)]="emailField" name="emailField" type="text" class="form-control" placeholder="Email">
       </div>
-  
-      <select [(ngModel)]="roleField" name="roleField" class="form-control col-3">
-        <option value="USER">Admin</option>
-        <option value="SUPERUSER">Super-User</option>
-        <option value="ADMIN">User</option>
-        <option selected value=""></option>
-      </select>
+      <ngx-select [items]="roles" [(ngModel)]="roleField" name="roleField" defaultValue={{roles[0].id}} class="col-3"></ngx-select>
       <button (click)="getUsers()" type="button" class="btn-borderless col-1"><fa-icon [icon]="faSearch" size="2x"></fa-icon></button>
     </div>
   </form>
@@ -49,7 +43,6 @@
       </td>
       <td>
         <button (click)="openModalConfirmDeleteUser(templateConfirmDeleteUser, i)" type="button" class="btn-borderless btn-delete">
-          <!-- deleteUser(i) -->
           <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
         </button>
       </td>
@@ -95,11 +88,7 @@
       <div class="form-group row">
         <label for="role" class="col-sm-2 col-form-label">Role:</label>
         <div class="col-sm-10">
-          <select [(ngModel)]="userToCreate.role" id="role" name="role" class="form-control">
-            <option selected value="USER">User</option>
-            <option value="SUPERUSER">Super-User</option>
-            <option value="ADMIN">Admin</option>
-          </select>
+          <ngx-select [items]="roles" [(ngModel)]="userToCreate.role" name="role" defaultValue={{roles[0].id}}></ngx-select>
         </div>
       </div>
       <div class="row">
@@ -137,11 +126,7 @@
       <div class="form-group row">
         <label for="role" class="col-sm-2 col-form-label">Role:</label>
         <div class="col-sm-10">
-          <select [(ngModel)]="userToUpdate.role" id="role" name="role" class="form-control">
-            <option selected value="USER">User</option>
-            <option value="SUPERUSER">Super-User</option>
-            <option value="ADMIN">Admin</option>
-          </select>
+          <ngx-select [items]="roles" [(ngModel)]="userToUpdate.role" name="role" defaultValue={{roles[0].id}}></ngx-select>
         </div>
       </div>
       <div class="row">

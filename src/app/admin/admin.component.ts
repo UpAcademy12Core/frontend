@@ -25,6 +25,7 @@ export class AdminComponent implements OnInit {
   private userToUpdate: User = new User();
   private rowUserToDelete: number;
   private headers = ["username", "email", "role"];
+  private roles = [{'id': "USER", 'text': "User"}, {'id': "SUPERUSER", 'text': "Super User"}, {'id': "ADMIN", 'text': "Admin"}];
   private showTable: boolean = false;
   faSearch = faSearch;
   faEdit = faEdit;
@@ -57,6 +58,8 @@ export class AdminComponent implements OnInit {
     },(error: string) => {
       console.log(error);
     });
+    console.log(this.userToCreate);
+    
     this.modalRef.hide();
     this.userToCreate.email = "";
     this.userToCreate.username = "";
@@ -73,6 +76,7 @@ export class AdminComponent implements OnInit {
         console.log(error);
       });
       this.modalRef.hide();
+      console.log(this.userToUpdate);
   }
 
   public deleteUser() {
