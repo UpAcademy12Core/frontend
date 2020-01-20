@@ -1,13 +1,15 @@
-
-<div class="container mx-auto">
-  <!-- <img src="" alt="UpAcademy imagem"> -->
-
-<input [(ngModel)]="user.email" type="email" placeholder="escreve o email" />
-<br>
-<br>
-<input [(ngModel)]="user.password" type="password" placeholder="escreve a password" />
-<br>
-<br>
-<p *ngIf="showError">{{errorMsg}}</p>
-<button (click)="login()"> LOG IN </button>
+<div class="vh-100 d-flex">
+  <div class="container m-auto text-center">
+  <img class="p-5" src="https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png" alt="UpAcademy imagem" width="600 px"> 
+  <br>
+  <input [(ngModel)]="user.email" type="email" placeholder="escreve o email" />
+  <br>
+  <br>
+  <input [(ngModel)]="user.password" type="password" placeholder="escreve a password" />
+  <br>
+  <br>
+  <p *ngIf="showError">{{errorMsg}}</p>
+  <button class="btn btn-primary" (click)="login()"> LOG IN </button>
+  </div>
 </div>
+
