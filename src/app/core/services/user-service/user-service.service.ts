@@ -35,6 +35,13 @@ export class UserServiceService {
     }
     return false;
   }
+  
+  public isSuperUser(){
+    if (this.currentUser && this.currentUser.role == "SUPERUSER") {
+      return true;
+    }
+    return false;
+  }
 
   public authenticateUser(user: User) {
     return this.http.post(this.url + "login", user);
@@ -76,6 +83,15 @@ export class UserServiceService {
 
   public deleteUser(id: number) {
     return this.http.delete(this.url + id, {responseType: 'text'});
+  }
+  public validatePassword(id: number, email: string, oldPassword: number,newPassword: number){
+    const params = new HttpParams();
+    params.set("id", ""+id);
+    params.set("email", email);
+    params.set("oldPassword", ""+oldPassword);
+    params.set("newPassword", ""+newPassword);
+    return this.http.put(this.url,{params})
+
   }
 
 }

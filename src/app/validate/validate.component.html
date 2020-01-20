@@ -1,0 +1,28 @@
+<div class="container">
+    <img class="p-5" src="https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png" alt="UpAcademy imagem" width="600 px">
+<form >
+    <div class="row">
+        <label for="validateEmail">Email: </label>
+        <input [(ngModel)]="email" id="validateEmail" name="email" type="email" placeholder="Email">
+    </div>
+
+    <div class="row">
+        <label for="validateOldPassword">Password antiga: </label>
+        <input [(ngModel)]="oldPassword"id="validateOldPassword" name="passwordold" type="password" placeholder="Password antiga">
+    </div>
+
+    <div class="row">
+        <label for="validateNewPassword">Password nova: </label>
+        <input [(ngModel)]="newPassword1" id="validateNewPassword" name="password" type="password" placeholder="Password nova">
+    </div>
+    <div class="row">
+        <label for="validateNew2Password">Password nova: </label>
+        <input [(ngModel)]="newPassword2" id="validateNew2Password" name="passworddup" type="password" placeholder="Password nova">
+    </div>
+    <div class="row">
+        <button  type="button">Enviar</button>
+    </div>
+</form>
+   
+
+</div>
