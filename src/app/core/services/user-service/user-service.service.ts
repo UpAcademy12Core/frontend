@@ -84,26 +84,22 @@ export class UserServiceService {
   public deleteUser(id: number) {
     return this.http.delete(this.url + id, {responseType: 'text'});
   }
-  public validatePassword(user: User ,newPassword: string){
+  public validatePassword(user: User, newPassword: string){
     const params = new HttpParams();
-   // params.set("id", ""+id);
-    //params.set("email", email);
-    //params.set("oldPassword", ""+oldPassword);
     params.set("newPassword",newPassword);
     return this.http.put(this.url +user,{params})
-
   }
 
   public resetPassword(id: number) {
-    return this.http.post(this.url + "resetpassword/" + id, {responseType: 'text'});
+    return this.http.put(this.url + "resetpassword/" + id, {responseType: 'text'});
   }
 
+  user: User
   public updatePassword(currentPassword: string, newPassword: string) {
-    const params = new HttpParams();
-    params.set("name", this.getCurrentName());
-    params.set("currentPassword", currentPassword);
-    params.set("newPassword", newPassword);
-    return this.http.post(this.url + "updatepassword", {params}, {responseType: 'text'});
+    this.user = this.getCurrentUser();
+    this.user.password = currentPassword;
+    
+    return this.http.put(this.url + "validate?newPass=" + newPassword, this.user, {responseType: 'text'});
   }
 
   public getUserById(id: number){
