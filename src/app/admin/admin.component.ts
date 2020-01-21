@@ -62,7 +62,7 @@ export class AdminComponent implements OnInit {
     
     this.modalRef.hide();
     this.userToCreate.email = "";
-    this.userToCreate.username = "";
+    this.userToCreate.name = "";
     this.userToCreate.role = "";
   }
 

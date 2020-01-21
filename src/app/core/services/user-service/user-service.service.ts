@@ -48,7 +48,7 @@ export class UserServiceService {
   }
 
   public getCurrentName():string {
-    return this.currentUser.username;
+    return this.currentUser.name;
   }
 
   public getCurrentUser() {
