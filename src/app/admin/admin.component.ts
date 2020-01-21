@@ -24,9 +24,10 @@ export class AdminComponent implements OnInit {
   private userToCreate: User = new User();
   private userToUpdate: User = new User();
   private rowUserToDelete: number;
-  private headers = ["username", "email", "role"];
+  private headers = ["name", "email", "role"];
   private roles = [{'id': "USER", 'text': "User"}, {'id': "SUPERUSER", 'text': "Super User"}, {'id': "ADMIN", 'text': "Admin"}];
   private showTable: boolean = false;
+  private resetPasswordConfirm: boolean = true;
   faSearch = faSearch;
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
@@ -58,16 +59,11 @@ export class AdminComponent implements OnInit {
     },(error: string) => {
       console.log(error);
     });
-    console.log(this.userToCreate);
-    
     this.modalRef.hide();
-    this.userToCreate.email = "";
-    this.userToCreate.username = "";
-    this.userToCreate.role = "";
+    this.userToCreate = new User();
   }
 
   public updateUser() {
-    //this.userToUpdate.password = "1234";
     this.userApi.updateUser(this.userToUpdate).subscribe(
       (msg: string) => {
         this.getUsers();
@@ -93,6 +89,18 @@ export class AdminComponent implements OnInit {
       this.modalRef.hide();
   }
 
+  // Descomentar quando a endpoint estiver implementada
+  public resetPassword() {
+    console.log("Reseting password");
+    // this.userApi.resetPassword(this.userToUpdate.id).subscribe(
+    //   (msg: string) => {
+    //     console.log(msg);
+    //   },(error: string) => {
+    //     console.log(error);
+    //   });
+    this.modalRef.hide();
+  }
+
   openModalAddUser(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
@@ -106,5 +114,6 @@ export class AdminComponent implements OnInit {
     this.rowUserToDelete = rowIndex;
     this.modalRef = this.modalService.show(template);
   }
+
 
 }

@@ -6,7 +6,7 @@
 
 
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+    <button class="navbar-toggler" type="button" (click)="collapse=!collapse" data-toggle="collapse" data-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,8 +27,8 @@
         <li class="nav-item dropdown" dropdown triggers="hover" #dp="bs-dropdown" role="menu" (mouseleave)="dp.hide()">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" dropdownToggle>Perfil </a>
           <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-            <a class="dropdown-item" href="#">
-              <fa-icon [icon]="faUserAlt" size="sm" style="color: gray;"></fa-icon>  Preferências
+            <a class="dropdown-item" href="#"  [routerLink]="['/profile']" >
+              <fa-icon [icon]="faUserAlt" size="sm" style="color: gray;"></fa-icon>  Meu Perfil
             </a>
             <a class="dropdown-item" href="#" (click)="logout()">
               <fa-icon [icon]="faSignOutAlt" size="md" style="color: gray;"></fa-icon>  Sair

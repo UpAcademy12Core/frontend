@@ -21,15 +21,15 @@
   </form>
 
   <!-- Table -->
-  <table *ngIf = "showTable" class="table table-striped container m-3 col-12">
+  <table *ngIf = "showTable" class="table table-striped container m-3 col-12 text-center">
     <thead class="thead-dark">
     <tr>
       <th scope="col"></th>
-      <th scope="col">Nome</th>
-      <th scope="col">Email</th>
-      <th scope="col">Role</th>
-      <th scope="col">Editar</th>
-      <th scope="col">Eliminar</th>
+      <th scope="col-5">Nome</th>
+      <th scope="col-3">Email</th>
+      <th scope="col-2">Role</th>
+      <th scope="col-1">Editar</th>
+      <th scope="col-1">Eliminar</th>
     </tr>
   </thead>
   <tbody>
@@ -55,7 +55,7 @@
 <ng-template #templateConfirmDeleteUser>
   <div class="modal-body text-center">
     <p>Tem a certeza que deseja remover o utilizador?</p>
-    <button type="button" class="btn btn-default" (click)="deleteUser()" >Sim</button>
+    <button type="button" class="btn btn-danger" (click)="deleteUser()" >Sim</button>
     <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Não</button>
   </div>
 </ng-template>
@@ -72,9 +72,9 @@
     Preencha os dados abaixo:
     <form class="mg-5 mt-3 container">
       <div class="form-group row">
-        <label for="username" class="col-sm-2 col-form-label">Nome:</label>
+        <label for="name" class="col-sm-2 col-form-label">Nome:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="userToCreate.username" name="username" id="username" type="text" class="form-control"
+          <input [(ngModel)]="userToCreate.name" name="name" id="name" type="text" class="form-control"
             placeholder="Digite o nome aqui" required>
         </div>
       </div>
@@ -102,6 +102,11 @@
 <ng-template #templateUpdateUser>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Atualizar Utilizador</h4>
+    <button *ngIf="resetPasswordConfirm" type="button" class="btn btn-danger btn-sm ml-auto col-4" aria-label="Editar" (click)="resetPasswordConfirm = !resetPasswordConfirm">Reset Password</button>
+    <div *ngIf="!resetPasswordConfirm" class="ml-auto row">
+      <button class="btn btn-danger col-sm-6 btn-sm" (click)="resetPassword()">Comfirmar</button>
+      <button class="btn btn-secondary col-sm-5 btn-sm ml-1" (click)="resetPasswordConfirm = !resetPasswordConfirm">Cancelar</button>
+    </div>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -110,9 +115,9 @@
     Atualize os dados abaixo:
     <form class="mg-5 mt-3 container">
       <div class="form-group row">
-        <label for="username" class="col-sm-2 col-form-label">Nome:</label>
+        <label for="name" class="col-sm-2 col-form-label">Nome:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="userToUpdate.username" name="username" id="username" type="text" class="form-control"
+          <input [(ngModel)]="userToUpdate.name" name="name" id="name" type="text" class="form-control"
             placeholder="Digite o nome aqui">
         </div>
       </div>
