@@ -61,6 +61,9 @@ export class AdminComponent implements OnInit {
     });
     this.modalRef.hide();
     this.userToCreate = new User();
+    this.userToCreate.email = "";
+    this.userToCreate.name = "";
+    this.userToCreate.role = "";
   }
 
   public updateUser() {

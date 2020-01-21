@@ -5,14 +5,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './core/guards/auth/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { AdminGuard } from './core/guards/admin.guard';
-<<<<<<< HEAD
 import { ProfileComponent } from './profile/profile.component';
-=======
 import { ValidateComponent } from './validate/validate.component';
 
 
 
->>>>>>> 334e034e542adb21a480bc5314f0797c3a07c203
 
 const routes: Routes = [
 
@@ -27,14 +24,13 @@ const routes: Routes = [
     canActivate: [AuthGuard,AdminGuard]
   },
   {
-<<<<<<< HEAD
     path:'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard]
-=======
+  },
+  {
     path: 'validate',
     component:ValidateComponent
->>>>>>> 334e034e542adb21a480bc5314f0797c3a07c203
   },
   {
     path: 'login',
