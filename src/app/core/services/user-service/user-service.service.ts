@@ -84,13 +84,13 @@ export class UserServiceService {
   public deleteUser(id: number) {
     return this.http.delete(this.url + id, {responseType: 'text'});
   }
-  public validatePassword(id: number, email: string, oldPassword: number,newPassword: number){
+  public validatePassword(user: User ,newPassword: string){
     const params = new HttpParams();
-    params.set("id", ""+id);
-    params.set("email", email);
-    params.set("oldPassword", ""+oldPassword);
-    params.set("newPassword", ""+newPassword);
-    return this.http.put(this.url,{params})
+   // params.set("id", ""+id);
+    //params.set("email", email);
+    //params.set("oldPassword", ""+oldPassword);
+    params.set("newPassword",newPassword);
+    return this.http.put(this.url +user,{params})
 
   }
 
@@ -104,6 +104,10 @@ export class UserServiceService {
     params.set("currentPassword", currentPassword);
     params.set("newPassword", newPassword);
     return this.http.post(this.url + "updatepassword", {params}, {responseType: 'text'});
+  }
+
+  public getUserById(id: number){
+    return this.http.get(this.url + id)
   }
 
 }

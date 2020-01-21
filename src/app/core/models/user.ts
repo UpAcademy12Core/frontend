@@ -1,9 +1,10 @@
 export class User {
-  'id': number;
+  'id'?: number;
   'name': string;
   'email': string;
   'role': string;
-  //'password': string;
+  'password': string;
+  'validatedEmail': boolean;
 
   constructor(data?: any) {
     Object.assign(this, data);
