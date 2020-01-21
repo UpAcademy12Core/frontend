@@ -1,26 +1,23 @@
 <body style="background-color: rgb(101, 159, 207) " class="vh-100 d-flex" >
- 
-  <div class="vh-100 d-flex container-fluid text-center">
 
-    <div id="containerMain" class="container-fluid m-auto text-center"
-    style="background-color: white; width: 700px; height: 550px;; margin-top: 30px; align-content: center; border-radius: 25px">
-      
-      <img class="p-5 mt-5 mb-4" 
-      src="https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png" 
-      alt="UpAcademy imagem" width="500 px" style=" align-self: auto;"> 
+  <div id="containerMain" class="container-fluid m-auto text-center"
+  style="background-color: white; width: 700px; height: 550px;; margin-top: 30px; align-content: center; border-radius: 25px">
     
-      <input [(ngModel)]="user.email" type="email" placeholder="escreva o email" class="form-control text-center mt-1 mb-4 mx-auto" style="width: 300px;"/>
-      
-      <input [(ngModel)]="user.password" type="password" placeholder="escreva a password" class="form-control text-center mt-1 mx-auto" style="width: 300px;"/>
+    <img class="p-5 mt-5 mb-3 " src="https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png" 
+    alt="UpAcademy imagem" width="500 px" style=" align-self: auto;"> 
+  
+    <input [(ngModel)]="user.email" id="EmailInput" type="email" placeholder="escreva o email" 
+    class="form-control form-control-lg text-center mt-1 mb-4 mx-auto" style="width: 350px;"/>
     
-      <button type="button" class="btn btn-link mt-0 mb-2">Esqueci-me da Password</button>
-      <br>
-      <p *ngIf="showError" style="color: red;">{{errorMsg}}</p>
+    <input [(ngModel)]="user.password" id="PasswordInput" type="password" placeholder="escreva a password" 
+    class="form-control form-control-lg text-center mt-1 mx-auto" style="width: 350px;"/>
+  
+    <button id="ForgotPassButton" type="button" class="btn btn-link mt-0 mb-3">Esqueci-me da Password</button>
+    <br>
+    <p *ngIf="showError" id="ErrorMsg" style="color: red;">{{errorMsg}}</p>
 
-      <button class="btn btn-primary mt-4" (click)="login()"> LOG IN </button>
+    <button id="LogInButton" class="btn btn-primary btn-lg mt-4" (click)="login()"> LOG IN </button>
 
-    </div>
-    
   </div>
 
 </body>

@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     private userApi: UserServiceService,
     private router: Router
   ) { }
+  
   public login() {
     this.userApi.authenticateUser(this.user).subscribe((result: any) => {
       console.log(result);
