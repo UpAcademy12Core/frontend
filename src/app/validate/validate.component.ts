@@ -49,8 +49,13 @@ export class ValidateComponent implements OnInit {
         //.subscribe(
         //(msg:string)=>
         //)
+      }else{
+        //erro 2passes novar nao corespondem
+      };
+       }else{
+        //msg erro email nao é igual
        }
-    }
+    
   
 
   
