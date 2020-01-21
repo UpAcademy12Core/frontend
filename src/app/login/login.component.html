@@ -1,15 +1,27 @@
-<div class="vh-100 d-flex">
-  <div class="container m-auto text-center">
-  <img class="p-5" src="https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png" alt="UpAcademy imagem" width="600 px"> 
-  <br>
-  <input [(ngModel)]="user.email" type="email" placeholder="escreve o email" />
-  <br>
-  <br>
-  <input [(ngModel)]="user.password" type="password" placeholder="escreve a password" />
-  <br>
-  <br>
-  <p *ngIf="showError">{{errorMsg}}</p>
-  <button class="btn btn-primary" (click)="login()"> LOG IN </button>
+<body style="background-color: rgb(101, 159, 207) " class="vh-100 d-flex" >
+ 
+  <div class="vh-100 d-flex container-fluid text-center">
+
+    <div id="containerMain" class="container-fluid m-auto text-center"
+    style="background-color: white; width: 700px; height: 550px;; margin-top: 30px; align-content: center; border-radius: 25px">
+      
+      <img class="p-5 mt-5 mb-4" 
+      src="https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png" 
+      alt="UpAcademy imagem" width="500 px" style=" align-self: auto;"> 
+    
+      <input [(ngModel)]="user.email" type="email" placeholder="escreva o email" class="form-control text-center mt-1 mb-4 mx-auto" style="width: 300px;"/>
+      
+      <input [(ngModel)]="user.password" type="password" placeholder="escreva a password" class="form-control text-center mt-1 mx-auto" style="width: 300px;"/>
+    
+      <button type="button" class="btn btn-link mt-0 mb-2">Esqueci-me da Password</button>
+      <br>
+      <p *ngIf="showError" style="color: red;">{{errorMsg}}</p>
+
+      <button class="btn btn-primary mt-4" (click)="login()"> LOG IN </button>
+
+    </div>
+    
   </div>
-</div>
+
+</body>
 
