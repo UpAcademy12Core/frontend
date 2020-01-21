@@ -16,7 +16,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxSelectModule } from 'ngx-select-ex';
+<<<<<<< HEAD
 import { ProfileComponent } from './profile/profile.component';
+=======
+import { ValidateComponent } from './validate/validate.component';
+>>>>>>> 334e034e542adb21a480bc5314f0797c3a07c203
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { ProfileComponent } from './profile/profile.component';
     HeaderComponent,
     FooterComponent,
     AdminComponent,
+<<<<<<< HEAD
     ProfileComponent
+=======
+    ValidateComponent
+>>>>>>> 334e034e542adb21a480bc5314f0797c3a07c203
   ],
   imports: [
     BrowserModule,
