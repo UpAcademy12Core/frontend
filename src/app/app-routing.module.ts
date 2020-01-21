@@ -29,7 +29,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'validate',
+    path: 'validate/:id',
     component:ValidateComponent
   },
   {

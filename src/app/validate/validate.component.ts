@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../core/services/user-service/user-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User } from '../core/models/user';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-validate',
@@ -10,23 +13,45 @@ export class ValidateComponent implements OnInit {
 
   public id: number;
   public email: string;
-  public oldPassword: number;
-  public newPassword1: number;
-  public newPassword2: number;
+  public oldPassword: string;
+  public newPassword1: string;
+  public newPassword2: string;
+  public validUser: User= new User();
+
 
   constructor(
-    private userApi: UserServiceService
-  ) { }
-
+    private userApi: UserServiceService,
+    private router: Router,
+    private route :ActivatedRoute
+  ) { 
+    this.route.params.subscribe(
+      params => {
+        this.userApi.getUserById(Number(params.id)).subscribe(
+          (user: User) => {
+            if(user.validatedEmail != true){
+              this.router.navigate(['/not-found']);
+            }else{
+              this.validUser=user;
+            };
+          }
+        )}
+    )
+  }
+  
   ngOnInit() {
   }
+
   public validateUser(){
-   if(this.newPassword1 == this.newPassword2){
-    this.userApi.validatePassword(this.id, this.email, this.oldPassword, this.newPassword1)
-    //.subscribe(
-    //(msg:string)=>
-    //)
-   }
+    if(this.validUser.email ==this.email){
+      if(this.newPassword1 == this.newPassword2){
+        this.validUser.password = this.oldPassword;
+        this.userApi.validatePassword(this.validUser, this.newPassword1)
+        //.subscribe(
+        //(msg:string)=>
+        //)
+       }
+    }
+  
 
   
   }
