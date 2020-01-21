@@ -70,19 +70,21 @@
   </div>
   <div class="modal-body container">
     Preencha os dados abaixo:
-    <form class="mg-5 mt-3 container">
+    <form class="mg-5 mt-3 container" #addUserForm="ngForm" (ngSubmit) = "createUser()">
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nome:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="userToCreate.name" name="name" id="name" type="text" class="form-control"
-            placeholder="Digite o nome aqui" required>
+          <input #nameField="ngModel" [(ngModel)]="userToCreate.name" name="name" id="name" type="text" required
+          minlength="2" placeholder="Digite o nome aqui" class="form-control" required>
+          <small class="text-danger" [hidden] = "nameField.valid || !nameField.touched">Digite o Nome!</small>
         </div>
       </div>
       <div class="form-group row">
         <label for="email" class="col-sm-2 col-form-label">Email:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="userToCreate.email" id="email" name="email" type="email" class="form-control"
-            placeholder="Digite o Email aqui" required>
+          <input email #emailField="ngModel" [(ngModel)]="userToCreate.email" id="email" name="email" type="email"
+          class="form-control" placeholder="Digite o Email aqui" required>
+          <small class="text-danger" [hidden] = "emailField.valid || !emailField.touched">Email inválido!</small>
         </div>
       </div>
       <div class="form-group row">
@@ -92,7 +94,7 @@
         </div>
       </div>
       <div class="row">
-        <button (click)="createUser()" type="submit" class="btn btn-primary mx-auto">Adicionar</button>
+        <button type="submit" [disabled]="!addUserForm.valid" class="btn btn-primary mx-auto">Adicionar</button>
       </div>
     </form>
   </div>
@@ -113,19 +115,21 @@
   </div>
   <div class="modal-body container">
     Atualize os dados abaixo:
-    <form class="mg-5 mt-3 container">
+    <form class="mg-5 mt-3 container" #updateUserForm="ngForm" (ngSubmit) = "updateUser()">
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nome:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="userToUpdate.name" name="name" id="name" type="text" class="form-control"
-            placeholder="Digite o nome aqui">
+          <input #nameField="ngModel" [(ngModel)]="userToUpdate.name" name="name" id="name" type="text"
+          class="form-control" required minlength="2" placeholder="Digite o nome aqui" required>
+          <small class="text-danger" [hidden] = "nameField.valid || !nameField.touched">Digite o Nome!</small>
         </div>
       </div>
       <div class="form-group row">
         <label for="email" class="col-sm-2 col-form-label">Email:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="userToUpdate.email" id="email" name="email" type="text" class="form-control"
-            placeholder="Digite o Email aqui">
+          <input email #emailField="ngModel" [(ngModel)]="userToUpdate.email" id="email" name="email" type="email"
+           class="form-control" placeholder="Digite o Email aqui" required>
+           <small class="text-danger" [hidden] = "emailField.valid || !emailField.touched">Email inválido!</small>
         </div>
       </div>
       <div class="form-group row">
@@ -135,7 +139,7 @@
         </div>
       </div>
       <div class="row">
-        <button (click)="updateUser()" type="button" class="btn btn-primary mx-auto">Atualizar</button>
+        <button type="submit" [disabled]="!updateUserForm.valid" class="btn btn-primary mx-auto">Atualizar</button>
       </div>
     </form>
   </div>

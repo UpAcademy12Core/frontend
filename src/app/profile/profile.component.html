@@ -1,27 +1,30 @@
-<form class="mg-5 mt-3 col-5 container">
+<form class="mg-5 mt-3 col-5 container" #updateProfileForm="ngForm" (ngSubmit)="updateUser()">
   <div class="row my-5 text-center">
     <h5 class="col">Atualize os seus dados</h5>
   </div>
   <div class="row">
-    <button class="ml-auto btn btn-link" (click)="openModalUpdatePassword(templateUpdatePassword)">Alterar password</button>
+    <button class="ml-auto btn btn-link" (click)="openModalUpdatePassword(templateUpdatePassword)">Alterar
+      password</button>
   </div>
   <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">Nome:</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="user.name" name="name" id="name" type="text" class="form-control"
-        placeholder="Digite o nome aqui" required>
+      <input #nameField="ngModel" [(ngModel)]="user.name" name="name" id="name" type="text" class="form-control"
+        placeholder="Digite o nome aqui" required minlength="2">
+      <small class="text-danger" [hidden]="nameField.valid || !nameField.touched">Digite o Nome!</small>
     </div>
   </div>
   <div class="form-group row">
     <label for="email" class="col-sm-2 col-form-label">Email:</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="user.email" id="email" name="email" type="email" class="form-control"
-        placeholder="Digite o Email aqui" required>
+      <input email #emailField="ngModel" [(ngModel)]="user.email" id="email" name="email" type="email"
+        class="form-control" placeholder="Digite o Email aqui" required>
+      <small class="text-danger" [hidden]="emailField.valid || !emailField.touched">Email inválido!</small>
     </div>
   </div>
-
   <div class="row">
-    <button (click)="updateUser()" type="submit" class="btn btn-primary mx-auto">Atualizar</button>
+    <button [disabled]="!updateProfileForm.valid" type="submit"
+      class="btn btn-primary mx-auto">Atualizar</button>
   </div>
 </form>
 
@@ -36,30 +39,36 @@
   </div>
   <div class="modal-body container">
     Preencha os dados abaixo:
-    <form class="mg-5 mt-3 container">
+    <form class="mg-5 mt-3 container" #updatePasswordForm="ngForm" (ngSubmit)="updatePassword()">
       <div class="form-group row">
         <label for="passwordatual" class="col-sm-2 col-form-label">Password Atual:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="currentPassword" name="passwordatual" id="passwordatual" type="password" class="form-control"
-            placeholder="Digite a password atual aqui" required>
+          <input #password1Field="ngModel" [(ngModel)]="currentPassword" name="passwordatual" id="passwordatual"
+            type="password" class="form-control" placeholder="Digite a password atual aqui" required minlength="8">
+          <small class="text-danger" [hidden]="password1Field.valid || !password1Field.touched">Digite a password com no
+            mínimo 8 dígitos!</small>
         </div>
       </div>
       <div class="form-group row">
-        <label for="novopassword1" class="col-sm-2 col-form-label">Nova password:</label>
+        <label for="newpassword1" class="col-sm-2 col-form-label">Nova password:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="newPassword1" name="novopassword1" id="novopassword1" type="password" class="form-control"
-            placeholder="Digite a nova password aqui" required>
+          <input #password2Field="ngModel" [(ngModel)]="newPassword1" name="newpassword1" id="newpassword1"
+            type="password" class="form-control" placeholder="Digite a nova password aqui" required minlength="8">
+            <small class="text-danger" [hidden]="password2Field.valid || !password2Field.touched">Digite a password com no
+              mínimo 8 dígitos!</small>
         </div>
       </div>
       <div class="form-group row">
         <label for="novopassword2" class="col-sm-2 col-form-label">Nova password:</label>
         <div class="col-sm-10">
-          <input [(ngModel)]="newPassword2" name="novopassword2" id="novopassword2" type="password" class="form-control"
-            placeholder="Confirme a nova password" required>
+          <input #password3Field="ngModel" [(ngModel)]="newPassword2" name="novopassword2" id="novopassword2"
+          type="password" class="form-control" placeholder="Confirme a nova password" required  minlength="8">
+          <small class="text-danger" [hidden]="password2Field != password3Field">A nova password 
+            não corresponde</small>
         </div>
       </div>
       <div class="row">
-        <button (click)="updatePassword()" type="submit" class="btn btn-primary mx-auto">Atualizar</button>
+        <button [disabled]="!updatePasswordForm.valid || (password2Field != password3Field)" type="submit" class="btn btn-primary mx-auto">Atualizar</button>
       </div>
     </form>
   </div>
