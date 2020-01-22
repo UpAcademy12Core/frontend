@@ -1,24 +1,28 @@
 <body style="background-color: rgb(101, 159, 207) " class="vh-100 d-flex" >
 
-  <div id="containerMain" class="container-fluid m-auto text-center"
+  <form #updateProfileForm="ngForm" (ngSubmit)="login()" id="containerMain" class="container-fluid m-auto text-center"
   style="background-color: white; width: 700px; height: 550px;; margin-top: 30px; align-content: center; border-radius: 25px">
     
     <img class="p-5 mt-5 mb-3 " src="https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png" 
     alt="UpAcademy imagem" width="500 px" style=" align-self: auto;"> 
   
-    <input [(ngModel)]="user.email" id="EmailInput" type="email" placeholder="escreva o email" 
-    class="form-control form-control-lg text-center mt-1 mb-4 mx-auto" style="width: 350px;"/>
+    <input email #emailField="ngModel" [(ngModel)]="user.email" id="EmailInput" type="email" name="EmailInput" placeholder="escreva o email" 
+    class="form-control form-control-lg text-center mt-1 mb-4 mx-auto" style="width: 350px;" required/>
+    <small class="text-danger" [hidden]="emailField.valid || !emailField.touched">Email inválido!</small>
     
-    <input [(ngModel)]="user.password" id="PasswordInput" type="password" placeholder="escreva a password" 
+    <input [(ngModel)]="user.password" id="PasswordInput" name="PasswordInput" type="password" placeholder="escreva a password" 
     class="form-control form-control-lg text-center mt-1 mx-auto" style="width: 350px;"/>
   
-    <button id="ForgotPassButton" type="button" class="btn btn-link mt-0 mb-3">Esqueci-me da Password</button>
-    <br>
-    <p *ngIf="showError" id="ErrorMsg" style="color: red;">{{errorMsg}}</p>
+    <!-- <button id="ForgotPassButton" type="button" class="btn btn-link mt-0 mb-3">Esqueci-me da Password</button>
+    <br> -->
+    
+    <div *ngIf = "showPasswordError">
+      <small class="text-danger mx-auto">Password errado, tente novamente</small>
+    </div>
+    
+    <button [disabled]="!updateProfileForm.valid" id="LogInButton" class="btn btn-primary btn-lg mt-4" type="submit"> LOG IN </button>
 
-    <button id="LogInButton" class="btn btn-primary btn-lg mt-4" (click)="login()"> LOG IN </button>
-
-  </div>
+</form>
 
 </body>
 

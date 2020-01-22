@@ -15,6 +15,8 @@ export class ProfileComponent implements OnInit {
   private currentPassword: string;
   private newPassword1: string;
   private newPassword2: string;
+  private showCurrentPassError: boolean = false;
+  private showNewPassError: boolean = false;
 
 
   constructor(
@@ -42,17 +44,20 @@ export class ProfileComponent implements OnInit {
     if (this.newPassword1 === this.newPassword2) {
       this.userApi.updatePassword(this.currentPassword, this.newPassword2).subscribe(
         (msg: string) => {
+          this.showCurrentPassError = false;
+          this.modalRef.hide();
+          this.currentPassword = "";
+          this.newPassword1 = "";
+          this.newPassword2 = "";
           console.log(msg);
         },(error: string) => {
+          this.showCurrentPassError = true;
           console.log(error);
         });
     } else {
       console.log("A password digitada no campo 3 é diferente da digitada no campo 2");
+      this.showNewPassError = true;
     }
-    this.currentPassword = "";
-    this.newPassword1 = "";
-    this.newPassword2 = "";
-    this.modalRef.hide();
   }
 
   openModalUpdatePassword(template: TemplateRef<any>) {
