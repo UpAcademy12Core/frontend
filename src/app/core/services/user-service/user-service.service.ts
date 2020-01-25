@@ -86,7 +86,7 @@ export class UserServiceService {
   }
 
   public deleteUser(id: number) {
-    return this.http.delete(this.url + id, {responseType: 'text'});
+    return this.http.put(this.url + id, {responseType: 'text'});
   }
   public validatePassword(user: User, newPassword: string){
     const params = new HttpParams();

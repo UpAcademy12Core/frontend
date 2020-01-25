@@ -15,7 +15,7 @@
       <div class="col-4">
         <input [(ngModel)]="emailField" name="emailField" type="text" class="form-control" placeholder="Email">
       </div>
-      <ngx-select [items]="roles" [(ngModel)]="roleField" name="roleField" defaultValue={{roles[0].id}} class="col-3"></ngx-select>
+      <ngx-select [items]="rolesWithAll" [(ngModel)]="roleField" name="roleField" defaultValue={{rolesWithAll[0].id}} class="col-3"></ngx-select>
       <button (click)="getUsers()" type="button" class="btn-borderless col-1"><fa-icon [icon]="faSearch" size="2x"></fa-icon></button>
     </div>
   </form>
