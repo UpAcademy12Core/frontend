@@ -89,9 +89,9 @@ export class UserServiceService {
     return this.http.put(this.url + id, {responseType: 'text'});
   }
   public validatePassword(user: User, newPassword: string){
-    const params = new HttpParams();
-    params.set("newPassword",newPassword);
-    return this.http.put(this.url + user,{params})
+    /* const params = new HttpParams();
+    params.set("newPassword",newPassword); */
+    return this.http.put(this.url +"validate?newPass=" + newPassword,user, {responseType: 'text'})
   }
 
   public resetPassword(id: number) {
