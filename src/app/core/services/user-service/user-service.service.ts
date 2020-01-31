@@ -97,13 +97,11 @@ export class UserServiceService {
   public resetPassword(id: number) {
     return this.http.put(this.url + "resetpassword/" + id, {responseType: 'text'});
   }
-
-  user: User
+  
   public updatePassword(currentPassword: string, newPassword: string) {
-    this.user = this.getCurrentUser();
-    this.user.password = currentPassword;
-    
-    return this.http.put(this.url + "validate?newPass=" + newPassword, this.user, {responseType: 'text'});
+    let user: User = this.getCurrentUser();
+    user.password = currentPassword;
+    return this.http.put(this.url + "validate?newPass=" + newPassword, user, {responseType: 'text'});
   }
 
   public getUserById(id: number){

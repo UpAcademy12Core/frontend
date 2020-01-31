@@ -25,12 +25,12 @@
           <a class="nav-link" [routerLink]="['']">Admin</a>
         </li>
         <li class="nav-item dropdown" dropdown #dp="bs-dropdown" role="menu">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" dropdownToggle>Perfil </a>
+          <a class="nav-link dropdown-toggle btn-nav" id="navbardrop" data-toggle="dropdown" dropdownToggle>Perfil </a>
           <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-            <a class="dropdown-item" href="#"  [routerLink]="['/profile']" >
+            <a class="dropdown-item btn-nav" [routerLink]="['/profile']" >
               <fa-icon [icon]="faUserAlt" size="sm" style="color: gray;"></fa-icon>  Meu Perfil
             </a>
-            <a class="dropdown-item" href="#" (click)="logout()">
+            <a class="dropdown-item btn-nav" (click)="logout()">
               <fa-icon [icon]="faSignOutAlt" size="md" style="color: gray;"></fa-icon>  Sair
             </a>
           </div>
