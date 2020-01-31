@@ -1,6 +1,28 @@
-.maincontent {
-    margin-top: 76px;
-    margin-bottom: 55px;
-    overflow: auto;
-    max-height: 100vh;
+.containerall {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  app-header {
+    flex-shrink: 0;
+    height: 57px;
   }
+
+  .maincontent {
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 2em;
+    height: 81%;
+    overflow-y: scroll;
+  }
+
+  app-footer {
+    flex-shrink: 0;
+    height: 40px;
+  }
+
+}
+
+
