@@ -4,16 +4,12 @@
       <img src="https://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png" width="235" height="50" alt="">
     </a>
 
-
-
-    <button class="navbar-toggler" type="button" (click)="collapse=!collapse" data-toggle="collapse" data-target="#navbarResponsive"
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-toggle="collapse" data-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    
-
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse" id="navbarResponsive" [ngClass]="{ 'show': !isCollapsed }">
       <!-- <ul class="m-auto pr-5 text-secondary">
       Bem vindo {{name}}
     </ul> -->

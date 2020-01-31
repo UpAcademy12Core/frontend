@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   public name: string;
   public showAdminTab: boolean = false;
+  public isCollapsed = true;
   faUserAlt = faUserAlt;
   faSignOutAlt = faSignOutAlt;
 
@@ -36,5 +37,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  public collapse() {
+    if (!this.isCollapsed) {
+      this.isCollapsed = true;
+    }
+  }
 
 }
