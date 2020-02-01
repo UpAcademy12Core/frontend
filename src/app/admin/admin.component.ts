@@ -8,6 +8,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin',
@@ -38,6 +39,7 @@ export class AdminComponent implements OnInit {
   constructor(
     private userApi: UserServiceService,
     private modalService: BsModalService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -56,9 +58,11 @@ export class AdminComponent implements OnInit {
   public createUser() {
     this.userApi.createUser(this.userToCreate).subscribe(
       (msg: string) => {
+        this.showToastSuccess("Usuário adicionado com sucesso");
         this.getUsers();
         console.log(msg);
       }, (error: string) => {
+        this.showToastErro("Falha ao adicionar Usuário");
         console.log(error);
       });
     this.modalRef.hide();
@@ -68,9 +72,11 @@ export class AdminComponent implements OnInit {
   public updateUser() {
     this.userApi.updateUser(this.userToUpdate).subscribe(
       (msg: string) => {
+        this.showToastSuccess("Dados atualizados com sucesso");
         this.getUsers();
         console.log(msg);
       }, (error: string) => {
+        this.showToastErro("Falha na atualização dos dados");
         console.log(error);
       });
     this.modalRef.hide();
@@ -80,23 +86,26 @@ export class AdminComponent implements OnInit {
   public deleteUser() {
     this.userApi.deleteUser(this.users[this.rowUserToDelete].id).subscribe(
       (msg: string) => {
+        this.showToastSuccess("Usuário eliminado com sucesso");
         this.getUsers();
         console.log(msg);
         if (this.users.length <= 0) {
           this.showTable = false;
         }
       }, (error: string) => {
+        this.showToastErro("Falha na eliminação do usuário");
         console.log(error);
       });
     this.modalRef.hide();
   }
 
   public resetPassword() {
-    console.log("Reseting password");
     this.userApi.resetPassword(this.userToUpdate.id).subscribe(
       (msg: string) => {
+        this.showToastSuccess("Password atualizado com sucesso");
         console.log(msg);
       }, (error: string) => {
+        this.showToastErro("Falha na atualização da password");
         console.log(error);
       });
     this.modalRef.hide();
@@ -116,6 +125,12 @@ export class AdminComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  showToastSuccess(msg: string) {
+    this.toastr.success(msg, 'Sucesso', {timeOut: 3000});
+  }
 
+  showToastErro(msg: string) {
+    this.toastr.warning(msg, 'Erro', {timeOut: 3000});
+  }
 
 }
