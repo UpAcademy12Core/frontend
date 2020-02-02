@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
       this.userApi.updatePassword(this.currentPassword, this.newPassword2).subscribe(
         (msg: string) => {
           this.showCurrentPassError = false;
+          this.showNewPassError = false;
           this.modalRef.hide();
           this.currentPassword = "";
           this.newPassword1 = "";
@@ -55,7 +56,7 @@ export class ProfileComponent implements OnInit {
           this.showToastSuccess("Password atualizada com sucesso");
           console.log(msg);
         },(error: string) => {
-          this.showToastErro("Falha na atualização da password");
+          this.showCurrentPassError = true;
           console.log(error);
         });
     } else {
